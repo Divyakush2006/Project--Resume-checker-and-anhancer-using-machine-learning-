@@ -99,9 +99,11 @@ The Flask application is typically accessible at `http://127.0.0.1:5000/`. Confi
 ### 6. Frontend Access
 Access the frontend interface by opening the `index.html` file directly within a web browser. This file encapsulates the entirety of the user interface.
 
-Crucial Note: It is imperative to ensure that the Flask backend is actively running (python app.py) prior to accessing index.html, as the frontend initiates API requests to http://127.0.0.1:5000/analyze.
+* **Crucial Note:** It is imperative to ensure that the Flask backend is actively running (python app.py) prior to accessing index.html, as the frontend initiates API requests to http://127.0.0.1:5000/analyze.
 
-### Usage Protocol
+
+## Usage Protocol
+
 * **Backend Initialization:** Initially, verify the operational status of the Flask application by executing python app.py in the terminal.
 
 * **Frontend Access:** Access the index.html file within your preferred web browser.
@@ -116,31 +118,43 @@ Crucial Note: It is imperative to ensure that the Flask backend is actively runn
 
 * **Report Review:** A comprehensive analysis report will subsequently be rendered on the display interface, presenting scores, skill comparisons, and personalized feedback.
 
-### Project Structure
+
+## Project Structure
+
 ```bash
 .
 ├── app.py                  # Flask backend application, responsible for handling file uploads and API endpoints.
 ├── resume_parser.py        # Contains the core logic for PDF parsing, skill extraction, scoring, and feedback generation.
 ├── index.html              # Frontend user interface, comprising HTML, CSS, and JavaScript components.
 └── requirements.txt        # Delineates the Python dependencies necessary for the project's operation (to be created if not present).
+
+
 ```
 
-### Contributing
+
+## Contributing
+
 Contributions to this project are highly encouraged and appreciated. Individuals possessing suggestions for enhancements, novel functionalities, or defect resolutions are invited to:
 
 * **Fork** the repository.
 
 * **Create a new branch** (e.g., `git checkout -b feature/DescriptiveFeatureName` or `bugfix/IssueResolution`).
 
-**Implement the desired modifications.
-**
-**Commit** the changes with a clear and concise message (e.g., `git commit -m "Add new feature"`).
+* **Implement the desired modifications.**
 
-**Push** the local branch to the forked repository (`git push origin feature/DescriptiveFeatureName`).
+* **Commit** the changes with a clear and concise message (e.g., `git commit -m "Add new feature"`).
 
-**Submit a Pull Request** to the `main` branch of this repository for review.
+* **Push** the local branch to the forked repository (`git push origin feature/DescriptiveFeatureName`).
 
-License
+* **Submit a Pull Request** to the `main` branch of this repository for review.
+
+
+## License
 This project is distributed under an open-source license and is available under the [MIT License](https://opensource.org/licenses/MIT).
 
-Disclaimer: This tool offers automated analytical insights and feedback. Users are advised to critically evaluate all suggestions and exercise independent judgment when modifying their resumes. It is important to note that salary estimations are inherently complex and necessitate research utilizing credible and current industry resources.
+### Disclaimer:
+This tool offers automated analytical insights and feedback. Users are advised to critically evaluate all suggestions and exercise independent judgment when modifying their resumes. It is important to note that salary estimations are inherently complex and necessitate research utilizing credible and current industry resources.
+
+
+## Check out my Linkedin:
+[Linkedin Profile](https://www.linkedin.com/in/divyakush-punjabi/)
