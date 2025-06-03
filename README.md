@@ -50,7 +50,7 @@ Follow these steps to set up and run the project locally:
 ### Prerequisites
 
 * Python 3.8+
-* `pip` (Python package installer)
+ `pip` (Python package installer)
 * Git
 
 ### 1. Clone the Repository
@@ -60,3 +60,87 @@ First, clone the repository to your local machine:
 ```bash
 git clone [https://github.com/Divyakush2006/Project--Resume-checker-and-anhancer-using-machine-learning-](https://github.com/Divyakush2006/Project--Resume-checker-and-anhancer-using-machine-learning-)
 cd Project--Resume-checker-and-anhancer-using-learning-
+```
+### 2. Virtual Environment Creation and Activation (Recommended Practice)
+The establishment and activation of a virtual environment are strongly recommended for efficient dependency management:
+
+```bash
+python -m venv venv
+# On Windows
+.\venv\Scripts\activate
+# On macOS/Linux
+source venv/bin/activate
+```
+### 3. Dependency Installation
+Proceed with the installation of the requisite Python packages. It is advisable to utilize a `requirements.txt` file if available within the repository (which can be generated via `pip freeze > requirements.txt`).
+
+```bash
+pip install -r requirements.txt
+# Alternatively, individual installations can be performed if a requirements.txt file is absent:
+# pip install Flask Flask-CORS pdfplumber spacy
+```
+
+### 4. spaCy Model Download
+This project necessitates the download of a compact English language model for spaCy to facilitate its NLP functionalities:
+
+```bash
+python -m spacy download en_core_web_sm
+```
+
+### 5. Flask Backend Execution
+Navigate to the root directory of the project (the location of `app.py`) and initiate the Flask application:
+
+```bash
+python app.py
+```
+The Flask application is typically accessible at `http://127.0.0.1:5000/`. Confirmation of its operational status will be indicated by console output similar to `* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)`.
+
+
+### 6. Frontend Access
+Access the frontend interface by opening the `index.html` file directly within a web browser. This file encapsulates the entirety of the user interface.
+
+Crucial Note: It is imperative to ensure that the Flask backend is actively running (python app.py) prior to accessing index.html, as the frontend initiates API requests to http://127.0.0.1:5000/analyze.
+
+### Usage Protocol
+* **Backend Initialization:** Initially, verify the operational status of the Flask application by executing python app.py in the terminal.
+
+* **Frontend Access:** Access the index.html file within your preferred web browser.
+
+* **Document Upload:**
+
+   * Initiate the resume upload process by clicking the designated "Upload Your Resume (PDF)" area or by dragging and dropping the resume PDF file into this zone.
+
+   * Similarly, for the job description, click the "Upload Job Description (PDF)" area or drag and dropping the job description PDF file into its respective zone.
+
+* **Analysis Commencement:** Activate the analytical process by selecting the "Analyze My Resume" button.
+
+* **Report Review:** A comprehensive analysis report will subsequently be rendered on the display interface, presenting scores, skill comparisons, and personalized feedback.
+
+### Project Structure
+```bash
+.
+├── app.py                  # Flask backend application, responsible for handling file uploads and API endpoints.
+├── resume_parser.py        # Contains the core logic for PDF parsing, skill extraction, scoring, and feedback generation.
+├── index.html              # Frontend user interface, comprising HTML, CSS, and JavaScript components.
+└── requirements.txt        # Delineates the Python dependencies necessary for the project's operation (to be created if not present).
+```
+
+### Contributing
+Contributions to this project are highly encouraged and appreciated. Individuals possessing suggestions for enhancements, novel functionalities, or defect resolutions are invited to:
+
+* **Fork** the repository.
+
+* **Create a new branch** (e.g., `git checkout -b feature/DescriptiveFeatureName` or `bugfix/IssueResolution`).
+
+**Implement the desired modifications.
+**
+**Commit** the changes with a clear and concise message (e.g., `git commit -m "Add new feature"`).
+
+**Push** the local branch to the forked repository (`git push origin feature/DescriptiveFeatureName`).
+
+**Submit a Pull Request** to the `main` branch of this repository for review.
+
+License
+This project is distributed under an open-source license and is available under the [MIT License](https://opensource.org/licenses/MIT).
+
+Disclaimer: This tool offers automated analytical insights and feedback. Users are advised to critically evaluate all suggestions and exercise independent judgment when modifying their resumes. It is important to note that salary estimations are inherently complex and necessitate research utilizing credible and current industry resources.
