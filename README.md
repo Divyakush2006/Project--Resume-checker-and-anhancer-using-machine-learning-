@@ -121,6 +121,7 @@ Access the frontend interface by opening the `index.html` file directly within a
 
 ## Project Structure
 
+
 ```bash
 .
 ├── app.py                  # Flask backend application, responsible for handling file uploads and API endpoints.
@@ -130,6 +131,7 @@ Access the frontend interface by opening the `index.html` file directly within a
 
 
 ```
+
 
 
 ## Contributing
