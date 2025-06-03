@@ -93,6 +93,6 @@ def analyze_documents():
             shutil.rmtree(temp_dir)
             print(f"Cleaned up temporary directory: {temp_dir}")
 
-if __name__ == '__main__':
-    # Ensure debug is True for development to see detailed errors
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     # Ensure debug is True for development to see detailed errors
+#     app.run(debug=True)
