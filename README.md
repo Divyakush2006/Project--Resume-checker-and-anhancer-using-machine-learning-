@@ -160,3 +160,9 @@ This tool offers automated analytical insights and feedback. Users are advised t
 
 ## Check out my Linkedin:
 [Linkedin Profile](https://www.linkedin.com/in/divyakush-punjabi/)
+
+---
+
+## Author
+
+**Divyakush Punjabi** — [www.divyakush.com](https://www.divyakush.com) · [GitHub](https://github.com/Divyakush2006) · [LinkedIn](https://linkedin.com/in/divyakush-punjabi)
