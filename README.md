@@ -1,168 +1,137 @@
-# Resume & Job Description Matcher and Enhancer using Machine Learning
+<div align="center">
+
+# Resume & Job Description Matcher
+
+**Upload a resume and a job description; get matched, missing and extra skills, three fit scores and targeted recommendations.**
+
+[![License: MIT](https://img.shields.io/github/license/Divyakush2006/Project--Resume-checker-and-anhancer-using-machine-learning-?color=blue)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)](https://www.python.org)
+[![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com)
+[![spaCy](https://img.shields.io/badge/spaCy-NER-09A3D5?logo=spacy&logoColor=white)](https://spacy.io)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+
+[Report a bug](https://github.com/Divyakush2006/Project--Resume-checker-and-anhancer-using-machine-learning-/issues/new/choose) · [Request a feature](https://github.com/Divyakush2006/Project--Resume-checker-and-anhancer-using-machine-learning-/issues/new/choose)
+
+<img src="docs/images/home.png" alt="Resume and job description upload screen with the analysis report sections: overview scores, skill comparison and recommendations" width="100%">
+
+</div>
 
 ## Overview
 
-This project is a web-based application designed to assist job seekers in tailoring their resumes to specific job descriptions. It leverages Natural Language Processing (NLP) and keyword matching to analyze your resume against a target job description, providing insights into skill alignment, resume completeness, and recruiter readiness.
-
-The application allows users to upload their resume and a job description (both in PDF format), processes them, and then presents a detailed analysis, including:
-* Skill comparison (matched, missing, and extra skills)
-* Overall compatibility scores
-* Actionable feedback and recommendations to improve your resume's relevance.
+A web application that helps job seekers tailor a resume to a specific role. It extracts text from both PDFs, identifies skills, education and organisations with keyword matching and spaCy named-entity recognition, compares the resume against the job description, and returns a report with scores and concrete next steps.
 
 ## Features
 
-* **PDF Upload:** Easily upload your resume and the job description as PDF files via a user-friendly interface.
-* **Skill Extraction & Comparison:** Automatically extracts skills from both documents and categorizes them into:
-    * **Matched Skills:** Skills present in both your resume and the JD.
-    * **Missing Skills:** Skills required by the JD but not found in your resume.
-    * **Extra Skills:** Skills present in your resume but not explicitly mentioned in the JD.
-* **Performance Scores:** Generates three key scores to gauge your resume's effectiveness:
-    * **Overall Skill Match Score:** Percentage of job description skills found in your resume.
-    * **Recruiter Readiness Score:** Assesses how well your resume is optimized for quick review by recruiters.
-    * **Resume Completeness Score:** Indicates if essential sections (skills, education, organizations) were successfully extracted.
-* **Actionable Feedback:** Provides personalized suggestions based on the analysis to help you enhance your resume for a better match.
-* **Extracted Information:** Displays key information parsed from your resume, such as education details and organizations, for your review.
-* **Salary Guidance:** Includes a disclaimer and recommendations for researching salary expectations using external resources, as direct salary estimation from resumes is unreliable.
+- **PDF upload:** drag and drop a resume and a job description.
+- **Skill comparison:** every skill is sorted into one of three groups:
+  - **Matched**: in both the resume and the job description
+  - **Missing**: required by the job description but absent from the resume
+  - **Extra**: in the resume but not asked for
+- **Three scores:**
 
-## Technologies Used
+  | Score | How it is calculated |
+  | --- | --- |
+  | Overall skill match | Share of job-description skills found in the resume |
+  | Recruiter readiness | 70% skill match, plus bonuses when education (+10) and organisations (+20) are found, capped at 100 |
+  | Resume completeness | Whether skills, education and organisations were each extracted (one third each) |
 
-The project is built using a combination of frontend and backend technologies:
+- **Actionable feedback:** personalised suggestions to close the gap with the role.
+- **Extracted information:** the education and organisations parsed from the resume, shown for review.
+- **Salary guidance:** pointers to credible external sources, since salaries cannot be estimated reliably from a resume.
 
-### Frontend
-* **HTML5:** For structuring the web content.
-* **Tailwind CSS:** For rapid and responsive UI development.
-* **JavaScript:** For dynamic client-side interactions and handling file uploads and results display.
+## How it works
 
-### Backend
-* **Python:** The core language for backend logic and NLP processing.
-* **Flask:** A micro web framework for Python, used to handle HTTP requests and serve the analysis results.
-* **Flask-CORS:** Enables Cross-Origin Resource Sharing for seamless communication between the frontend and backend.
-* **pdfplumber:** A Python library for extracting text and data from PDF files.
-* **spaCy:** An industrial-strength natural language processing library, used for Named Entity Recognition (NER) to extract organizations.
-* **re (Regex):** Python's built-in regular expression module for pattern matching and keyword extraction.
-* **werkzeug.utils.secure_filename:** For securely handling uploaded filenames.
-* **tempfile & shutil:** For managing temporary file storage and cleanup of uploaded PDFs.
+```mermaid
+flowchart LR
+    UI["index.html<br/>(upload form)"] -->|"POST /analyze<br/>resume + job_description PDFs"| API["Flask API<br/>app.py"]
+    API --> P["resume_parser.py"]
+    P --> T["pdfplumber<br/>text extraction"]
+    P --> S["Keyword and regex<br/>skill extraction"]
+    P --> N["spaCy NER<br/>organisations"]
+    S --> C["Skill comparison<br/>and scoring"]
+    N --> C
+    C -->|JSON report| UI
+```
 
-## Setup and Installation
+Uploaded files are written to a temporary directory for processing and removed afterwards.
 
-Follow these steps to set up and run the project locally:
+## Tech stack
+
+| Layer | Technology |
+| --- | --- |
+| Frontend | HTML5, Tailwind CSS, vanilla JavaScript |
+| Backend | Python, Flask, Flask-CORS |
+| Document parsing | pdfplumber |
+| NLP | spaCy (`en_core_web_sm`), regular expressions |
+
+## Getting started
 
 ### Prerequisites
 
-* Python 3.8+
- `pip` (Python package installer)
-* Git
+- Python 3.8 or later
+- Git
 
-### 1. Clone the Repository
-
-First, clone the repository to your local machine:
+### Installation
 
 ```bash
-git clone [https://github.com/Divyakush2006/Project--Resume-checker-and-anhancer-using-machine-learning-](https://github.com/Divyakush2006/Project--Resume-checker-and-anhancer-using-machine-learning-)
-cd Project--Resume-checker-and-anhancer-using-learning-
-```
-### 2. Virtual Environment Creation and Activation (Recommended Practice)
-The establishment and activation of a virtual environment are strongly recommended for efficient dependency management:
+git clone https://github.com/Divyakush2006/Project--Resume-checker-and-anhancer-using-machine-learning-.git
+cd Project--Resume-checker-and-anhancer-using-machine-learning-
 
-```bash
 python -m venv venv
-# On Windows
-.\venv\Scripts\activate
-# On macOS/Linux
-source venv/bin/activate
-```
-### 3. Dependency Installation
-Proceed with the installation of the requisite Python packages. It is advisable to utilize a `requirements.txt` file if available within the repository (which can be generated via `pip freeze > requirements.txt`).
+source venv/bin/activate          # Windows: venv\Scripts\activate
 
-```bash
 pip install -r requirements.txt
-# Alternatively, individual installations can be performed if a requirements.txt file is absent:
-# pip install Flask Flask-CORS pdfplumber spacy
-```
-
-### 4. spaCy Model Download
-This project necessitates the download of a compact English language model for spaCy to facilitate its NLP functionalities:
-
-```bash
 python -m spacy download en_core_web_sm
 ```
 
-### 5. Flask Backend Execution
-Navigate to the root directory of the project (the location of `app.py`) and initiate the Flask application:
+### Run
 
 ```bash
-python app.py
+python app.py                     # API on http://127.0.0.1:5000
 ```
-The Flask application is typically accessible at `http://127.0.0.1:5000/`. Confirmation of its operational status will be indicated by console output similar to `* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)`.
 
+Then open `index.html` in your browser. The page sends files to `http://127.0.0.1:5000/analyze`, so keep the Flask server running.
 
-### 6. Frontend Access
-Access the frontend interface by opening the `index.html` file directly within a web browser. This file encapsulates the entirety of the user interface.
+### Usage
 
-* **Crucial Note:** It is imperative to ensure that the Flask backend is actively running (python app.py) prior to accessing index.html, as the frontend initiates API requests to http://127.0.0.1:5000/analyze.
+1. Upload your resume (PDF) in the left panel.
+2. Upload the job description (PDF) in the right panel.
+3. Select **Analyze My Resume** to see the scores, skill comparison and recommendations.
 
+## API
 
-## Usage Protocol
+| Method | Endpoint | Body | Description |
+| --- | --- | --- | --- |
+| `GET` | `/` | none | Welcome message (service check) |
+| `POST` | `/analyze` | `multipart/form-data` with `resume` and `job_description` PDF files | Returns the analysis report as JSON |
 
-* **Backend Initialization:** Initially, verify the operational status of the Flask application by executing python app.py in the terminal.
+## Project structure
 
-* **Frontend Access:** Access the index.html file within your preferred web browser.
-
-* **Document Upload:**
-
-   * Initiate the resume upload process by clicking the designated "Upload Your Resume (PDF)" area or by dragging and dropping the resume PDF file into this zone.
-
-   * Similarly, for the job description, click the "Upload Job Description (PDF)" area or drag and dropping the job description PDF file into its respective zone.
-
-* **Analysis Commencement:** Activate the analytical process by selecting the "Analyze My Resume" button.
-
-* **Report Review:** A comprehensive analysis report will subsequently be rendered on the display interface, presenting scores, skill comparisons, and personalized feedback.
-
-
-## Project Structure
-
-
-```bash
+```
 .
-├── app.py                  # Flask backend application, responsible for handling file uploads and API endpoints.
-├── resume_parser.py        # Contains the core logic for PDF parsing, skill extraction, scoring, and feedback generation.
-├── index.html              # Frontend user interface, comprising HTML, CSS, and JavaScript components.
-└── requirements.txt        # Delineates the Python dependencies necessary for the project's operation (to be created if not present).
-
-
+├── app.py              # Flask app: upload handling and the /analyze endpoint
+├── resume_parser.py    # PDF parsing, skill extraction, comparison, scoring and feedback
+├── index.html          # Single-page user interface
+├── requirements.txt    # Python dependencies
+└── vercel.json         # Serverless routing configuration
 ```
 
+## Disclaimer
 
+The analysis is automated guidance. Review every suggestion before changing your resume, and research salary expectations with current, credible industry sources.
 
 ## Contributing
 
-Contributions to this project are highly encouraged and appreciated. Individuals possessing suggestions for enhancements, novel functionalities, or defect resolutions are invited to:
+Contributions are welcome. Please read the [contributing guide](https://github.com/Divyakush2006/.github/blob/main/CONTRIBUTING.md) before opening a pull request.
 
-* **Fork** the repository.
+## Security
 
-* **Create a new branch** (e.g., `git checkout -b feature/DescriptiveFeatureName` or `bugfix/IssueResolution`).
-
-* **Implement the desired modifications.**
-
-* **Commit** the changes with a clear and concise message (e.g., `git commit -m "Add new feature"`).
-
-* **Push** the local branch to the forked repository (`git push origin feature/DescriptiveFeatureName`).
-
-* **Submit a Pull Request** to the `main` branch of this repository for review.
-
+Please report vulnerabilities privately as described in the [security policy](https://github.com/Divyakush2006/.github/blob/main/SECURITY.md). Do not open a public issue.
 
 ## License
-This project is distributed under an open-source license and is available under the [MIT License](https://opensource.org/licenses/MIT).
 
-### Disclaimer:
-This tool offers automated analytical insights and feedback. Users are advised to critically evaluate all suggestions and exercise independent judgment when modifying their resumes. It is important to note that salary estimations are inherently complex and necessitate research utilizing credible and current industry resources.
-
-
-## Check out my Linkedin:
-[Linkedin Profile](https://www.linkedin.com/in/divyakush-punjabi/)
-
----
+Released under the [MIT License](LICENSE).
 
 ## Author
 
-**Divyakush Punjabi** — [www.divyakush.com](https://www.divyakush.com) · [GitHub](https://github.com/Divyakush2006) · [LinkedIn](https://linkedin.com/in/divyakush-punjabi)
+**Divyakush Punjabi** · [www.divyakush.com](https://www.divyakush.com) · [GitHub](https://github.com/Divyakush2006) · [LinkedIn](https://linkedin.com/in/divyakush-punjabi)
